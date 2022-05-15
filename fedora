@@ -9,6 +9,7 @@ mkdir ~/.compiled-apps && cd ~/.compiled-apps
 # st download
 cd ~/.compiled-apps
 git clone https://git.suckless.org/st && cd st
+patch -i ~/Fedora-OS/st-patch.diff
 sudo make clean install
 
 # bspwm download
