@@ -2,34 +2,29 @@
 sudo dnf update
 sudo dnf group install "base-x"
 
-# development tools
-sudo dnf install git make gcc pam-devel libxcb libxcb-devel libX11-devel libXft-devel fedora-workstation-repositories
-mkdir ~/.compiled-apps && cd ~/.compiled-apps
+# enable repositories
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:/ungoogled_chromium/Fedora_35/home:ungoogled_chromium.repo
+
+# downloading everything we need 
+sudo dnf install git make gcc pam-devel libxcb libxcb-devel libX11-devel libXft-devel fedora-workstation-repositories bspwm sxhkd stow pip xset wget unzip vim picom feh polybar imwheel breeze-cursor-theme rofi mpv thunar ungoogled-chromium
 
 # st download
+mkdir ~/.compiled-apps && cd ~/.compiled-apps
 cd ~/.compiled-apps
 git clone https://git.suckless.org/st && cd st
 patch -i ~/Fedora-OS/st-patch.diff
 sudo make clean install
 
-# bspwm download
-sudo dnf install bspwm sxhkd
-
 # dotfiles download
-sudo dnf install stow
 cd ~ && git clone https://github.com/HelamanWarrior/dotfiles.git && mv dotfiles .dotfiles && cd .dotfiles
 stow */
 
-# enable repositories
-sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-
 # install play-with-mpv
-sudo dnf install pip
 pip install wheel
 pip install git+https://github.com/thann/play-with-mpv --user
 
 # xinitrc setup
-sudo dnf install xset
 cp /etc/X11/xinit/xinitrc ~/.xinitrc
 echo -e '#!/usr/bin/sh\nexec bspwm' > ~/.xinitrc
 sudo chmod u+s /usr/bin/xinit
@@ -42,18 +37,10 @@ mv gruvbox-wallpapers/* $PWD/
 rm -rf gruvbox-wallpapers
 
 # download ubuntu nerd font
-sudo dnf install wget unzip
 cd /usr/share/fonts && sudo mkdir ubuntu-nerd-font && cd ubuntu-nerd-font
 sudo wget -O Ubuntu.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/UbuntuMono.zip 
 sudo unzip Ubuntu.zip && sudo rm Ubuntu.zip
 sudo fc-cache -v
-
-# basic apps to install
-sudo dnf install vim picom feh polybar imwheel breeze-cursor-theme rofi mpv thunar
-
-# install chromium
-sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:/ungoogled_chromium/Fedora_35/home:ungoogled_chromium.repo
-sudo dnf install ungoogled-chromium
 
 # setup theme
 cd ~/.compiled-apps
