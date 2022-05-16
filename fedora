@@ -7,13 +7,13 @@ sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-rele
 sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:/ungoogled_chromium/Fedora_35/home:ungoogled_chromium.repo
 
 # downloading everything we need 
-sudo dnf install git make gcc pam-devel libxcb libxcb-devel libX11-devel libXft-devel fedora-workstation-repositories bspwm sxhkd stow pip xset wget unzip vim picom feh polybar imwheel breeze-cursor-theme rofi mpv thunar ungoogled-chromium
+sudo dnf install git make gcc pam-devel libxcb libxcb-devel libX11-devel libXft-devel fedora-workstation-repositories bspwm sxhkd stow pip xset wget unzip vim picom feh polybar imwheel breeze-cursor-theme rofi mpv thunar ungoogled-chromium patch
 
 # st download
 mkdir ~/.compiled-apps && cd ~/.compiled-apps
 cd ~/.compiled-apps
 git clone https://git.suckless.org/st && cd st
-patch -i ~/Fedora-OS/st-patch.diff
+patch -i ~/Fedora-Installer/st-patch.diff
 sudo make clean install
 
 # dotfiles download
@@ -48,6 +48,7 @@ git clone https://github.com/TheGreatMcPain/gruvbox-material-gtk.git && cd gruvb
 sudo mkdir ~/.local/share/themes ~/.local/share/icons
 sudo cp themes/* ~/.local/share/themes/
 sudo cp icons/* ~/.local/share/icons/
+cd ~/.compiled-apps && rm -rf gruvbox-material-gtk
 
 # setup home directory
 cd ~ && mkdir Desktop Documents Downloads Videos
