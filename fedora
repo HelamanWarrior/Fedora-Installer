@@ -59,4 +59,4 @@ sudo cp -r icons/* ~/.local/share/icons/
 cd ~/.compiled-apps && rm -rf gruvbox-material-gtk
 
 # setup home directory
-cd ~ && mkdir Desktop Documents Downloads Videos
+cd ~ && mkdir Desktop Documents Downloads Music Videos
