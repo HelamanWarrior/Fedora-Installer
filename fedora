@@ -54,8 +54,8 @@ sudo fc-cache -v
 cd ~/.compiled-apps
 git clone https://github.com/TheGreatMcPain/gruvbox-material-gtk.git && cd gruvbox-material-gtk
 sudo mkdir ~/.local/share/themes ~/.local/share/icons
-sudo cp themes/* ~/.local/share/themes/
-sudo cp icons/* ~/.local/share/icons/
+sudo cp -r themes/* ~/.local/share/themes/
+sudo cp -r icons/* ~/.local/share/icons/
 cd ~/.compiled-apps && rm -rf gruvbox-material-gtk
 
 # setup home directory
