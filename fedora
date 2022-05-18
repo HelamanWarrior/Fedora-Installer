@@ -58,5 +58,8 @@ sudo cp -r themes/* ~/.local/share/themes/
 sudo cp -r icons/* ~/.local/share/icons/
 cd ~/.compiled-apps && rm -rf gruvbox-material-gtk
 
+# fix mouse cursor
+echo -e '[Icon Theme]\nInherits=breeze_cursors' | sudo tee /usr/share/icons/default/index.theme
+
 # setup home directory
 cd ~ && mkdir Desktop Documents Downloads Music Videos
