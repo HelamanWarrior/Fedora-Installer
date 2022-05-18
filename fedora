@@ -13,6 +13,7 @@ sudo dnf install git make gcc pam-devel libxcb libxcb-devel libX11-devel libXft-
 mkdir ~/.compiled-apps && cd ~/.compiled-apps
 cd ~/.compiled-apps
 git clone https://git.suckless.org/st && cd st
+cp config.def.h config.h
 patch -i ~/Fedora-Installer/st-patch.diff
 sudo make clean install
 
