@@ -12,7 +12,7 @@ sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-rele
 sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:/ungoogled_chromium/Fedora_35/home:ungoogled_chromium.repo
 
 # downloading everything we need 
-sudo dnf install git make gcc pam-devel libxcb libxcb-devel libX11-devel libXft-devel fedora-workstation-repositories bspwm sxhkd stow pip xset wget unzip vim picom feh polybar imwheel breeze-cursor-theme rofi mpv thunar ungoogled-chromium patch
+sudo dnf install git make gcc pam-devel libxcb libxcb-devel libX11-devel libXft-devel fedora-workstation-repositories bspwm sxhkd stow pip xset wget unzip vim picom feh polybar imwheel breeze-cursor-theme rofi mpv thunar ungoogled-chromium patch pavucontrol util-linux-user zsh tar
 
 # st download
 mkdir ~/.compiled-apps && cd ~/.compiled-apps
@@ -39,10 +39,8 @@ sudo chmod u+s /usr/bin/xinit
 sudo chmod +x ~/.xinitrc
 
 # wallpapers
-mkdir ~/Pictures && mkdir ~/Pictures/Wallpapers && cd ~/Pictures/Wallpapers
-git clone https://github.com/vctrblck/gruvbox-wallpapers.git
-mv gruvbox-wallpapers/* $PWD/
-rm -rf gruvbox-wallpapers
+mkdir ~/Pictures
+cp -r ~/Fedora-Installer/Wallpapers ~/Pictures/
 
 # download ubuntu nerd font
 cd /usr/share/fonts && sudo mkdir ubuntu-nerd-font && cd ubuntu-nerd-font
@@ -60,6 +58,9 @@ cd ~/.compiled-apps && rm -rf gruvbox-material-gtk
 
 # fix mouse cursor
 echo -e '[Icon Theme]\nInherits=breeze_cursors' | sudo tee /usr/share/icons/default/index.theme
+
+# setup shell 
+chsh -s $(which zsh)
 
 # setup home directory
 cd ~ && mkdir Desktop Documents Downloads Music Videos
