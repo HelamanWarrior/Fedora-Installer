@@ -9,38 +9,37 @@ sudo dnf group install "base-x"
 
 # enable repositories
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:/ungoogled_chromium/Fedora_35/home:ungoogled_chromium.repo
 
 # downloading everything we need 
-sudo dnf install git make gcc pam-devel libxcb libxcb-devel libX11-devel libXft-devel fedora-workstation-repositories bspwm sxhkd stow pip xset wget unzip vim picom feh polybar imwheel breeze-cursor-theme rofi mpv thunar ungoogled-chromium patch pavucontrol util-linux-user zsh tar
+sudo dnf install git make gcc pam-devel libxcb libxcb-devel libX11-devel libXft-devel fedora-workstation-repositories bspwm sxhkd stow pip xset wget unzip vim picom feh polybar imwheel breeze-cursor-theme rofi mpv thunar firefox patch pavucontrol util-linux-user zsh tar
 
 # st download
-mkdir ~/.compiled-apps && cd ~/.compiled-apps
-cd ~/.compiled-apps
+mkdir $HOME/.compiled-apps && cd $HOME/.compiled-apps
+cd $HOME/.compiled-apps
 git clone https://git.suckless.org/st && cd st
 wget -O st-alpha-0.8.5.diff https://st.suckless.org/patches/alpha/st-alpha-20220206-0.8.5.diff
 cp config.def.h config.h
 patch -i st-alpha-0.8.5.diff
-patch -i ~/Fedora-Installer/st-patch.diff
+patch -i $HOME/Fedora-Installer/st-patch.diff
 sudo make clean install
 
 # dotfiles download
-cd ~ && git clone https://github.com/HelamanWarrior/dotfiles.git && mv dotfiles .dotfiles && cd .dotfiles
+cd $HOME && git clone https://github.com/HelamanWarrior/dotfiles.git && mv dotfiles .dotfiles && cd .dotfiles
 stow */
 
-# install play-with-mpv
-pip install wheel
-pip install git+https://github.com/thann/play-with-mpv --user
+# ff2mpv setup
+cd $HOME/.compiled-apps && git clone https://github.com/woodruffw/ff2mpv && cd ff2mpv
+./install.sh firefox
 
 # xinitrc setup
-cp /etc/X11/xinit/xinitrc ~/.xinitrc
-echo -e '#!/usr/bin/sh\nexec bspwm' > ~/.xinitrc
+cp /etc/X11/xinit/xinitrc $HOME/.xinitrc
+echo -e '#!/usr/bin/sh\nexec bspwm' > $HOME/.xinitrc
 sudo chmod u+s /usr/bin/xinit
-sudo chmod +x ~/.xinitrc
+sudo chmod +x $HOME/.xinitrc
 
 # wallpapers
-mkdir ~/Pictures
-cp -r ~/Fedora-Installer/Wallpapers ~/Pictures/
+mkdir $HOME/Pictures
+cp -r $HOME/Fedora-Installer/Wallpapers $HOME/Pictures/
 
 # download ubuntu nerd font
 cd /usr/share/fonts && sudo mkdir ubuntu-nerd-font && cd ubuntu-nerd-font
@@ -49,12 +48,12 @@ sudo unzip Ubuntu.zip && sudo rm Ubuntu.zip
 sudo fc-cache -v
 
 # setup theme
-cd ~/.compiled-apps
+cd $HOME/.compiled-apps
 git clone https://github.com/TheGreatMcPain/gruvbox-material-gtk.git && cd gruvbox-material-gtk
-sudo mkdir ~/.local/share/themes ~/.local/share/icons
-sudo cp -r themes/* ~/.local/share/themes/
-sudo cp -r icons/* ~/.local/share/icons/
-cd ~/.compiled-apps && rm -rf gruvbox-material-gtk
+sudo mkdir $HOME/.local/share/themes ~/.local/share/icons
+sudo cp -r themes/* $HOME/.local/share/themes/
+sudo cp -r icons/* $HOME/.local/share/icons/
+cd $HOME/.compiled-apps && rm -rf gruvbox-material-gtk
 
 # fix mouse cursor
 echo -e '[Icon Theme]\nInherits=breeze_cursors' | sudo tee /usr/share/icons/default/index.theme
@@ -66,7 +65,7 @@ sed -i '/ZSH_THEME=/c\ZSH_THEME="gruvbox"' ~/.zschrc
 sed -i '/^ZSH_THEME=.*/a SOLARIZED_THEME="dark"' ~/.zshrc
 
 # setup home directory
-cd ~ && mkdir Desktop Documents Downloads Music Videos
+cd $HOME && mkdir Desktop Documents Downloads Music Videos
 
 # change default shell
 chsh -s $(which zsh)
