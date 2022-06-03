@@ -58,14 +58,9 @@ cd $HOME/.compiled-apps && rm -rf gruvbox-material-gtk
 # fix mouse cursor
 echo -e '[Icon Theme]\nInherits=breeze_cursors' | sudo tee /usr/share/icons/default/index.theme
 
-# setup shell 
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-curl -L https://raw.githubusercontent.com/sbugzu/gruvbox-zsh/master/gruvbox.zsh-theme > ~/.oh-my-zsh/custom/themes/gruvbox.zsh-theme
-sed -i '/ZSH_THEME=/c\ZSH_THEME="gruvbox"' ~/.zschrc
-sed -i '/^ZSH_THEME=.*/a SOLARIZED_THEME="dark"' ~/.zshrc
-
 # setup home directory
 cd $HOME && mkdir Desktop Documents Downloads Music Videos
 
-# change default shell
-chsh -s $(which zsh)
+# setup shell 
+echo 'After ZSH is done, run the fedora-finish-shell installer executable to theme the shell'
+cd $HOME/Fedora-Installer && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
