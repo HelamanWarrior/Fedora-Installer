@@ -11,7 +11,7 @@ sudo dnf group install "base-x"
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 
 # downloading everything we need 
-sudo dnf install git make gcc pam-devel libxcb libxcb-devel libX11-devel libXft-devel fedora-workstation-repositories bspwm sxhkd stow pip xset wget unzip vim picom feh polybar imwheel breeze-cursor-theme rofi mpv thunar firefox patch pavucontrol util-linux-user zsh tar
+sudo dnf install git make gcc pam-devel libxcb libxcb-devel libX11-devel libXft-devel fedora-workstation-repositories bspwm sxhkd stow pip xset wget unzip vim picom feh polybar imwheel breeze-cursor-theme rofi mpv thunar firefox patch pavucontrol util-linux-user zsh tar lxappearance
 
 # st download
 mkdir $HOME/.compiled-apps && cd $HOME/.compiled-apps
@@ -51,6 +51,7 @@ sudo fc-cache -v
 cd $HOME/.compiled-apps
 git clone https://github.com/TheGreatMcPain/gruvbox-material-gtk.git
 cd gruvbox-material-gtk
+sudo mkdir $HOME/.local/share
 sudo mkdir $HOME/.local/share/themes $HOME/.local/share/icons
 sudo cp -r themes/* $HOME/.local/share/themes/
 sudo cp -r icons/* $HOME/.local/share/icons/
