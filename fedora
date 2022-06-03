@@ -49,10 +49,8 @@ sudo fc-cache -v
 
 # setup theme
 cd $HOME/.compiled-apps
-git clone https://github.com/TheGreatMcPain/gruvbox-material-gtk.git
-cd gruvbox-material-gtk
-sudo mkdir $HOME/.local/share
-sudo mkdir $HOME/.local/share/themes $HOME/.local/share/icons
+git clone https://github.com/TheGreatMcPain/gruvbox-material-gtk.git && cd gruvbox-material-gtk
+sudo mkdir $HOME/.local $HOME/.local/share $HOME/.local/share/themes $HOME/.local/share/icons
 sudo cp -r themes/* $HOME/.local/share/themes/
 sudo cp -r icons/* $HOME/.local/share/icons/
 cd $HOME/.compiled-apps && rm -rf gruvbox-material-gtk
