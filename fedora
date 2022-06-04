@@ -4,6 +4,7 @@
 echo 'max_parallel_downloads=20' | sudo tee --append /etc/dnf/dnf.conf
 echo 'deltarpm=true' | sudo tee --append /etc/dnf/dnf.conf
 
+# installing xorg stuff
 sudo dnf update
 sudo dnf group install "base-x"
 
@@ -54,6 +55,9 @@ sudo mkdir $HOME/.local $HOME/.local/share $HOME/.local/share/themes $HOME/.loca
 sudo cp -r themes/* $HOME/.local/share/themes/
 sudo cp -r icons/* $HOME/.local/share/icons/
 cd $HOME/.compiled-apps && rm -rf gruvbox-material-gtk
+
+# fix the share directory permissions
+sudo chown $(whoami) $HOME/.local/share
 
 # fix mouse cursor
 echo -e '[Icon Theme]\nInherits=breeze_cursors' | sudo tee /usr/share/icons/default/index.theme
