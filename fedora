@@ -12,7 +12,7 @@ sudo dnf group install "base-x"
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 
 # downloading everything we need 
-sudo dnf install git make gcc pam-devel libxcb libxcb-devel libX11-devel libXft-devel fedora-workstation-repositories bspwm sxhkd stow pip xset wget unzip vim picom feh polybar imwheel breeze-cursor-theme rofi mpv thunar firefox patch pavucontrol util-linux-user zsh tar lxappearance
+sudo dnf install git make gcc pam-devel libxcb libxcb-devel libX11-devel libXft-devel fedora-workstation-repositories bspwm sxhkd stow pip xset wget unzip vim picom feh polybar imwheel breeze-cursor-theme rofi mpv thunar firefox patch pavucontrol util-linux-user zsh tar lxappearance pavucontrol notification-daemon google-noto-emoji-color-fonts
 
 # st download
 mkdir $HOME/.compiled-apps && cd $HOME/.compiled-apps
@@ -55,6 +55,21 @@ sudo mkdir $HOME/.local $HOME/.local/share $HOME/.local/share/themes $HOME/.loca
 sudo cp -r themes/* $HOME/.local/share/themes/
 sudo cp -r icons/* $HOME/.local/share/icons/
 cd $HOME/.compiled-apps && rm -rf gruvbox-material-gtk
+
+# setup notification service (NEEDS WORK)
+echo -e '[D-BUS Service]\nName=org.freedesktop.Notifications\nExec=/usr/libexec/notification-daemon\nSystemdService=notification-daemon.service' | sudo tee --append  /usr/share/dbus-1/services/org.freedesktop.Notifications.service
+
+# rofi emoji setup
+sudo dnf install rofi-devel autoconf automake libtool
+cd $HOME/.compiled-apps && git clone https://github.com/Mange/rofi-emoji && cd rofi-emoji
+autoreconf -i
+mkdir build
+cd build/
+../configure
+make
+sudo make install
+sudo dnf remove rofi-devel autoconf automake libtool
+cd $HOME/.compiled-apps && rm -rf rofi-emoji
 
 # fix the share directory permissions
 sudo chown $(whoami) $HOME/.local/share
